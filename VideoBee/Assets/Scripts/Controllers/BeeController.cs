@@ -111,6 +111,12 @@ namespace lvl_0
             OnBeeCollison?.Invoke(CollisionObject.Enemy);
         }
 
+        public void Zapped()
+        {
+            gameObject.SetActive(false);
+            OnBeeCollison?.Invoke(CollisionObject.Enemy);
+        }
+
         public void ChangeWind(Vector3 newWind)
         {
             m_currentWind = newWind;
@@ -156,6 +162,10 @@ namespace lvl_0
             if (m_beeState == BeeState.Alive)
             {
                 if (collision.CompareTag("SpiderWeb"))
+                {
+                    ChangeState(BeeState.Trapped);
+                }
+                else if (collision.CompareTag("UnsafeWall"))
                 {
                     ChangeState(BeeState.Trapped);
                 }
