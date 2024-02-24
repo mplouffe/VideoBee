@@ -31,10 +31,16 @@ namespace lvl_0
         [SerializeField]
         private float m_endTime;
 
+        [SerializeField]
+        private float m_deadTime;
+
+        [SerializeField]
+        private Vector3 m_levelStartPosition;
 
         private Duration m_startingDuration;
         private Duration m_restingDuration;
         private Duration m_endingDuration;
+        private Duration m_deadDuration;
 
         private LevelState m_levelState;
 
@@ -44,6 +50,7 @@ namespace lvl_0
             m_startingDuration = new Duration(m_startTime);
             m_restingDuration = new Duration(m_restTime);
             m_endingDuration = new Duration(m_endTime);
+            m_deadDuration = new Duration(m_deadTime);
             ChangeState(LevelState.Starting);
         }
 
@@ -82,6 +89,13 @@ namespace lvl_0
                         ChangeState(LevelState.Starting);
                     }
                     break;
+                case LevelState.Dead:
+                    m_deadDuration.Update(Time.deltaTime);
+                    if (m_deadDuration.Elapsed())
+                    {
+                        ChangeState(LevelState.Starting);
+                    }
+                    break;
             }
         }
 
@@ -97,7 +111,8 @@ namespace lvl_0
             {
                 case LevelState.Starting:
                     m_startingDuration.Reset();
-                    m_player.SetState(BeeState.Resting);
+                    m_player.ResetPlayer(m_levelStartPosition);
+                    m_player.ChangeState(BeeState.Resting);
                     m_beehive.SetCollider(false);
                     m_flower.SetCollider(true);
                     m_hud.UpdateStateText("Starting...");
@@ -105,46 +120,54 @@ namespace lvl_0
                     break;
                 case LevelState.Fetching:
                     m_flower.SetCollider(true);
-                    m_player.SetState(BeeState.Alive);
+                    m_player.ChangeState(BeeState.Alive);
                     m_hud.UpdateStateText("Fetching...");
                     break;
                 case LevelState.Resting:
                     m_restingDuration.Reset();
                     m_flower.SetCollider(false);
-                    m_player.SetState(BeeState.Resting);
+                    m_player.ChangeState(BeeState.Resting);
                     m_hud.UpdateStateText("Resting...");
                     break;
                 case LevelState.Returning:
                     m_beehive.SetCollider(true);
-                    m_player.SetState(BeeState.Alive);
+                    m_player.ChangeState(BeeState.Alive);
                     m_hud.UpdateStateText("Returning...");
                     break;
                 case LevelState.Ending:
                     m_endingDuration.Reset();
                     m_beehive.SetCollider(false);
-                    m_player.SetState(BeeState.Resting);
+                    m_player.ChangeState(BeeState.Resting);
                     m_hud.UpdateStateText("Ending...");
+                    break;
+                case LevelState.Dead:
+                    m_deadDuration.Reset();
+                    m_hud.UpdateStateText("Dead!");
                     break;
             }
 
             m_levelState = newState;
         }
 
-        private void OnBeeCollision(Collider2D collider)
+        private void OnBeeCollision(CollisionObject collision)
         {
-            if (collider.CompareTag("Beehive"))
+            switch (collision)
             {
-                if (m_levelState == LevelState.Returning)
-                {
-                    ChangeState(LevelState.Ending);
-                }
-            }
-            else if (collider.CompareTag("Flower"))
-            {
-                if (m_levelState == LevelState.Fetching)
-                {
-                    ChangeState(LevelState.Resting);
-                }
+                case CollisionObject.Beehive:
+                    if (m_levelState == LevelState.Returning)
+                    {
+                        ChangeState(LevelState.Ending);
+                    }
+                    break;
+                case CollisionObject.Flower:
+                    if (m_levelState == LevelState.Fetching)
+                    {
+                        ChangeState(LevelState.Resting);
+                    }
+                    break;
+                case CollisionObject.Enemy:
+                    ChangeState(LevelState.Dead);
+                    break;
             }
         }
     }
@@ -156,6 +179,14 @@ namespace lvl_0
         Fetching,
         Resting,
         Returning,
-        Ending
+        Ending,
+        Dead
+    }
+
+    public enum CollisionObject
+    {
+        Beehive,
+        Flower,
+        Enemy
     }
 }

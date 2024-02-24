@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Beehive
   - Flower
+  - Spider
+  - SpiderWeb
   layers:
   - Default
   - TransparentFX
