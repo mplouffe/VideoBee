@@ -14,6 +14,9 @@ namespace lvl_0
         private Vector3 m_direction = Vector3.up;
 
         [SerializeField]
+        private Vector3 m_currentWind = Vector3.zero;
+
+        [SerializeField]
         private float m_minimumSpeed;
 
         [SerializeField]
@@ -108,6 +111,11 @@ namespace lvl_0
             OnBeeCollison?.Invoke(CollisionObject.Enemy);
         }
 
+        public void ChangeWind(Vector3 newWind)
+        {
+            m_currentWind = newWind;
+        }
+
         private void UpdateDirection()
         {
             m_direction.Normalize();
@@ -118,6 +126,7 @@ namespace lvl_0
         {
             var desiredSpeed = m_controls.Level.Boost.IsPressed() ? m_boostSpeed : m_minimumSpeed;
             var desiredVelocity = m_direction * desiredSpeed;
+            desiredVelocity += m_currentWind;
             m_rigidBody.velocity = Vector3.MoveTowards(m_rigidBody.velocity, desiredVelocity, m_maxVelocityChange);
         }
 

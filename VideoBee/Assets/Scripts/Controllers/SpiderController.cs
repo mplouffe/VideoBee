@@ -35,9 +35,16 @@ namespace lvl_0
         [SerializeField]
         private Transform m_graphicsObject;
 
+        [SerializeField]
+        private GameObject m_anchors;
+
         private Vector3 m_trapStartPosition;
         private Vector3 m_targetPosition;
         private BeeController m_targetBee;
+
+        private Vector3 m_hangStartPosition;
+        private Vector3 m_hangEndPosition;
+        private Vector3 m_webRootPosition;
 
         private Duration m_movingDuration;
         private Duration m_hangingDuration;
@@ -53,6 +60,11 @@ namespace lvl_0
             m_trappingDuration = new Duration(m_trapTime);
             m_feastingDuration = new Duration(m_feastTime);
             m_web.OnBeeContact += OnBeeWebContact;
+
+            m_hangStartPosition = m_hangStart.position;
+            m_hangEndPosition = m_hangEnd.position;
+            m_webRootPosition = m_webRoot.position;
+            Destroy(m_anchors);
 
             ResetSpider();
         }
@@ -74,8 +86,8 @@ namespace lvl_0
                     }
                     else
                     {
-                        transform.position = Vector3.Lerp(m_hangEnd.localPosition, m_hangStart.localPosition, m_movingDuration.Delta());
-                        m_web.Span(m_webRoot.localPosition, transform.position);
+                        transform.position = Vector3.Lerp(m_hangEndPosition, m_hangStartPosition, m_movingDuration.Delta());
+                        m_web.Span(m_webRootPosition, transform.position);
                     }
                     break;
                 case SpiderState.Descending:
@@ -86,8 +98,8 @@ namespace lvl_0
                     }
                     else
                     {
-                        transform.position = Vector3.Lerp(m_hangStart.localPosition, m_hangEnd.localPosition, m_movingDuration.Delta());
-                        m_web.Span(m_webRoot.localPosition, transform.position);
+                        transform.position = Vector3.Lerp(m_hangStartPosition, m_hangEndPosition, m_movingDuration.Delta());
+                        m_web.Span(m_webRootPosition, transform.position);
                     }
                     break;
                 case SpiderState.Hanging:
@@ -121,8 +133,8 @@ namespace lvl_0
 
         private void ResetSpider()
         {
-            transform.position = m_hangStart.position;
-            m_web.Span(m_webRoot.localPosition, transform.localPosition);
+            transform.position = m_hangStartPosition;
+            m_web.Span(m_webRootPosition, transform.localPosition);
             ChangeState(SpiderState.Descending);
         }
 
