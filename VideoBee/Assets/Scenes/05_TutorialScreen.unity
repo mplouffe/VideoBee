@@ -239,7 +239,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_instructions:
-  - duration: 5
+  - duration: 2
+    text: The Hive needs help.
+  - duration: 3
     text: Fly to flowers.
   - duration: 2
     text: Collect pollen.
@@ -1174,7 +1176,7 @@ GameObject:
   - component: {fileID: 2114631758}
   - component: {fileID: 2114631757}
   m_Layer: 5
-  m_Name: HowToPlay
+  m_Name: HowToDrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1219,7 +1221,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: How To Play
+  m_text: How To Drone
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 284dbd9cc31e8f5458d27e38b54d91c6, type: 2}
   m_sharedMaterial: {fileID: -8389685676523306666, guid: 284dbd9cc31e8f5458d27e38b54d91c6, type: 2}
@@ -1331,7 +1333,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 129}
-  m_SizeDelta: {x: 486.4, y: 102.4}
+  m_SizeDelta: {x: 615, y: 102.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2144975685
 MonoBehaviour:
@@ -1353,7 +1355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fly to Flowers.
+  m_text: The Hive needs help.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 284dbd9cc31e8f5458d27e38b54d91c6, type: 2}
   m_sharedMaterial: {fileID: -8389685676523306666, guid: 284dbd9cc31e8f5458d27e38b54d91c6, type: 2}

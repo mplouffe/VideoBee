@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1256838858905599920}
   - component: {fileID: 1256838858905599933}
   m_Layer: 0
-  m_Name: SafeWall
+  m_Name: SafeWall-Horizontal
   m_TagString: SafeWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

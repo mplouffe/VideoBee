@@ -42,7 +42,8 @@ namespace lvl_0
             m_droopDuration.Update(Time.deltaTime);
             if (m_droopDuration.Elapsed())
             {
-                var waterDroplet = Instantiate(m_dropletPrefab, m_dripLocation, true);
+                var waterDroplet = Instantiate(m_dropletPrefab, m_dripLocation.position, Quaternion.identity);
+                Debug.Log("Droplet Created");
                 waterDroplet.SetFallingRate(m_dripVelocity);
                 m_drip.localScale = m_droopStart;
                 m_droopDuration.Reset();

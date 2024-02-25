@@ -99,14 +99,11 @@ namespace lvl_0
     {
         LogoScreen,
         Menu,
-        Settings,
-        Credits,
-        GameStart,
-        CutScene,
-        GameRunning,
-        GameOver,
         LevelEnd,
         GameComplete,
-        Instructions
+        GameOver,
+        Instructions,
+        GameStart,
+        GameRunning
     }
 }

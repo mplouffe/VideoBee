@@ -119,6 +119,7 @@ namespace lvl_0
                     else
                     {
                         transform.position = Vector3.Lerp(m_trapStartPosition, m_targetPosition, m_trappingDuration.Delta());
+                        m_web.Span(m_webRootPosition, transform.position);
                     }
                     break;
                 case SpiderState.Feasting:

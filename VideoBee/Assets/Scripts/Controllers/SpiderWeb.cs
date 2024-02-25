@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace lvl_0
 {
@@ -20,11 +21,12 @@ namespace lvl_0
 
         public void Span(Vector3 start, Vector3 end)
         {
-            if (!Mathf.Approximately(start.x, end.x) || start.y < end.y)
+            if (start.y < end.y)
             {
                 return;
             }
 
+            
             var length = start.y - end.y;
             var yPosition = end.y + length / 2;
 

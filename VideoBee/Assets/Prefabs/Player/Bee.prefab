@@ -5190,8 +5190,8 @@ MonoBehaviour:
   m_rigidBody: {fileID: 7684706196900430307}
   m_direction: {x: 0, y: 1, z: 0}
   m_currentWind: {x: 0, y: 0, z: 0}
-  m_minimumSpeed: 10
-  m_boostSpeed: 20
+  m_minimumSpeed: 20
+  m_boostSpeed: 30
   m_turningRadius: 0.025
   m_maxVelocityChange: 0.25
   m_struggleTime: 0.05

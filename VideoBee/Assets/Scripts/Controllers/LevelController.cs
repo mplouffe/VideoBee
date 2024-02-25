@@ -38,6 +38,8 @@ namespace lvl_0
         private float m_deadTime;
 
         [SerializeField]
+        private Transform m_beehiveSpawnPoint;
+
         private Vector3 m_levelStartPosition;
 
         private Duration m_startingDuration;
@@ -62,6 +64,7 @@ namespace lvl_0
 
         private void OnEnable()
         {
+            m_levelStartPosition = m_beehiveSpawnPoint.position;
             m_player.OnBeeCollison += OnBeeCollision;
             m_controls.EscapeMenu.Confirm.performed += OnConfirmPerformed;
             m_controls.EscapeMenu.Cancel.performed += OnCancelPerformed;

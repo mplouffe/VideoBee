@@ -52,4 +52,4 @@ MonoBehaviour:
   m_restTime: 3
   m_endTime: 3
   m_deadTime: 2
-  m_levelStartPosition: {x: -17.84, y: -11.37, z: 0}
+  m_beehiveSpawnPoint: {fileID: 0}

@@ -44,20 +44,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6689fd5dc3e2a469bff8bafeb7ac2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_buildIndexOffset: 4
+  m_buildIndexOffset: 5
   m_gameDictionaryEntries:
   - Game: 0
     LoaderSceneIndex: 0
   - Game: 1
     LoaderSceneIndex: 1
-  - Game: 8
+  - Game: 2
     LoaderSceneIndex: 2
-  - Game: 9
+  - Game: 3
     LoaderSceneIndex: 3
-  - Game: 7
-    LoaderSceneIndex: 4
   - Game: 4
+    LoaderSceneIndex: 4
+  - Game: 5
     LoaderSceneIndex: 5
+  - Game: 6
+    LoaderSceneIndex: 6
 --- !u!114 &990076353082248181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,4 +73,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_startingPlayerLives: 3
-  m_numberOfLevels: 2
+  m_numberOfLevels: 4

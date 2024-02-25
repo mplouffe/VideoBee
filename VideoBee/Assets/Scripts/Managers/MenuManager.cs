@@ -83,12 +83,6 @@ namespace lvl_0
                         LevelVault.Instance.Reset();
                         LevelAttendant.Instance.LoadGameState(GameState.Instructions);
                         break;
-                    case MenuItem.Settings:
-                        LevelAttendant.Instance.LoadGameState(GameState.Settings);
-                        break;
-                    case MenuItem.Credits:
-                        LevelAttendant.Instance.LoadGameState(GameState.Credits);
-                        break;
                     case MenuItem.Quit:
                         Application.Quit();
                         break;
@@ -110,8 +104,6 @@ namespace lvl_0
     public enum MenuItem
     {
         Start,
-        Settings,
-        Credits,
         Quit
     }
 }
