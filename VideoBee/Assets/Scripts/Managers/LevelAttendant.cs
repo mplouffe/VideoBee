@@ -88,6 +88,7 @@ namespace lvl_0
         GameStart,
         CutScene,
         GameRunning,
-        GameOver
+        GameOver,
+        LevelEnd
     }
 }

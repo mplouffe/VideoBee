@@ -1,11 +1,14 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Build.Content;
 using UnityEngine;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace lvl_0
 {
-    public class LevelController : MonoBehaviour
+    public class LevelController : SingletonBase<LevelController>
     {
         [SerializeField]
         private BeeController m_player;
@@ -37,26 +40,48 @@ namespace lvl_0
         [SerializeField]
         private Vector3 m_levelStartPosition;
 
+        [SerializeField]
+        private int m_playerLives;
+
         private Duration m_startingDuration;
         private Duration m_restingDuration;
         private Duration m_endingDuration;
         private Duration m_deadDuration;
 
         private LevelState m_levelState;
+        private LevelState m_previousLevelState;
+
+        private Controls m_controls;
 
         private void Awake()
         {
-            m_player.OnBeeCollison += OnBeeCollision;
             m_startingDuration = new Duration(m_startTime);
             m_restingDuration = new Duration(m_restTime);
             m_endingDuration = new Duration(m_endTime);
             m_deadDuration = new Duration(m_deadTime);
-            ChangeState(LevelState.Starting);
+            m_controls = new Controls();
+        }
+
+        private void OnEnable()
+        {
+            m_player.OnBeeCollison += OnBeeCollision;
+            m_controls.EscapeMenu.Confirm.performed += OnConfirmPerformed;
+            m_controls.EscapeMenu.Cancel.performed += OnCancelPerformed;
+            m_controls.PauseMenu.Pause.performed += OnPausePerformed;
         }
 
         private void OnDisable()
         {
             m_player.OnBeeCollison -= OnBeeCollision;
+            m_controls.EscapeMenu.Confirm.performed -= OnConfirmPerformed;
+            m_controls.EscapeMenu.Cancel.performed -= OnCancelPerformed;
+            m_controls.PauseMenu.Pause.performed -= OnPausePerformed;
+        }
+
+        private void Start()
+        {
+            m_hud.UpdateLives(m_playerLives);
+            ChangeState(LevelState.Starting);
         }
 
         private void Update()
@@ -86,16 +111,56 @@ namespace lvl_0
                     m_endingDuration.Update(Time.deltaTime);
                     if (m_endingDuration.Elapsed())
                     {
-                        ChangeState(LevelState.Starting);
+                        LevelAttendant.Instance.LoadGameState(GameState.LevelEnd);
                     }
                     break;
                 case LevelState.Dead:
                     m_deadDuration.Update(Time.deltaTime);
                     if (m_deadDuration.Elapsed())
                     {
-                        ChangeState(LevelState.Starting);
+                        if (m_playerLives > 0)
+                        {
+                            ChangeState(LevelState.Starting);
+                        }
+                        else
+                        {
+                            LevelAttendant.Instance.LoadGameState(GameState.GameOver);
+                        }
                     }
                     break;
+            }
+        }
+
+        public void Escape()
+        {
+            switch (m_levelState)
+            {
+                case LevelState.Escaped:
+                    LevelAttendant.Instance.LoadGameState(GameState.Menu);
+                    break;
+                case LevelState.Paused:
+                case LevelState.Fetching:
+                case LevelState.Returning:
+                    ChangeState(LevelState.Escaped);
+                    break;
+            }
+        }
+
+        public void Pause()
+        {
+            switch (m_levelState)
+            {
+                case LevelState.Paused:
+                    ChangeState(m_previousLevelState);
+                    break;
+                case LevelState.Escaped:
+                case LevelState.Fetching:
+                case LevelState.Returning:
+                    ChangeState(LevelState.Paused);
+                    break;
+
+
+
             }
         }
 
@@ -105,6 +170,18 @@ namespace lvl_0
             {
                 Debug.LogError($"Error: Attempting to switch to current state: [{m_levelState}]");
                 return;
+            }
+            
+            switch (m_levelState)
+            {
+                case LevelState.Paused:
+                    PopupsManager.Instance.Pause(false);
+                    m_controls.PauseMenu.Disable();
+                    break;
+                case LevelState.Escaped:
+                    PopupsManager.Instance.Escaped(false);
+                    m_controls.EscapeMenu.Disable();
+                    break;
             }
 
             switch (newState)
@@ -141,8 +218,22 @@ namespace lvl_0
                     m_hud.UpdateStateText("Ending...");
                     break;
                 case LevelState.Dead:
+                    m_playerLives--;
+                    m_hud.UpdateLives(m_playerLives);
                     m_deadDuration.Reset();
                     m_hud.UpdateStateText("Dead!");
+                    break;
+                case LevelState.Paused:
+                    m_previousLevelState = m_levelState;
+                    m_player.ChangeState(BeeState.Resting);
+                    m_controls.PauseMenu.Enable();
+                    PopupsManager.Instance.Pause(true);
+                    break;
+                case LevelState.Escaped:
+                    m_previousLevelState = m_levelState;
+                    m_player.ChangeState(BeeState.Resting);
+                    m_controls.EscapeMenu.Enable();
+                    PopupsManager.Instance.Escaped(true);
                     break;
             }
 
@@ -170,6 +261,22 @@ namespace lvl_0
                     break;
             }
         }
+
+        private void OnConfirmPerformed(CallbackContext context)
+        {
+            m_controls.EscapeMenu.Disable();
+            LevelAttendant.Instance.LoadGameState(GameState.Menu);
+        }
+
+        private void OnCancelPerformed(CallbackContext context)
+        {
+            ChangeState(m_previousLevelState);
+        }
+
+        private void OnPausePerformed(CallbackContext context)
+        {
+            ChangeState(m_previousLevelState);
+        }
     }
 
     public enum LevelState
@@ -180,7 +287,9 @@ namespace lvl_0
         Resting,
         Returning,
         Ending,
-        Dead
+        Dead,
+        Paused,
+        Escaped
     }
 
     public enum CollisionObject

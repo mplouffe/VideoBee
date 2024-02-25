@@ -9,6 +9,9 @@ public class HUDController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI m_StateText;
 
+    [SerializeField]
+    private TextMeshProUGUI m_livesText;
+
     private void Awake()
     {
         m_StateText.text = string.Empty;
@@ -29,5 +32,18 @@ public class HUDController : MonoBehaviour
     public void HideText()
     {
         m_StateText.gameObject.SetActive(false);
+    }
+
+    public void UpdateLives(int newNumberOfLives)
+    {
+        if (newNumberOfLives >= 0)
+        {
+            m_livesText.text = $"Bees x {newNumberOfLives}";
+        }
+        else
+        {
+            m_livesText.gameObject.SetActive(false);
+        }
+
     }
 }

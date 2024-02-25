@@ -54,22 +54,22 @@ namespace lvl_0
             if (!m_itemSelected)
             {
                 m_inputCooldownDuration.Update(Time.deltaTime);
-                if (m_inputCooldownDuration.Elapsed())
-                {
-                    var moveInput = m_inputActions.MainMenu.Move.ReadValue<Vector2>();
-                    if (moveInput.y < 0 && m_selectedMenuItem < MenuItem.Quit)
-                    {
-                        m_selectedMenuItem++;
-                        m_pointerArrow.anchoredPosition = m_pointerPositions[(int)m_selectedMenuItem];
-                        m_inputCooldownDuration.Reset();
-                    }
-                    else if (moveInput.y > 0 && m_selectedMenuItem > MenuItem.Start)
-                    {
-                        m_selectedMenuItem--;
-                        m_pointerArrow.anchoredPosition = m_pointerPositions[(int)m_selectedMenuItem];
-                        m_inputCooldownDuration.Reset();
-                    }
-                }
+                //if (m_inputCooldownDuration.Elapsed())
+                //{
+                //    var moveInput = m_inputActions.MainMenu.Move.ReadValue<Vector2>();
+                //    if (moveInput.y < 0 && m_selectedMenuItem < MenuItem.Quit)
+                //    {
+                //        m_selectedMenuItem++;
+                //        m_pointerArrow.anchoredPosition = m_pointerPositions[(int)m_selectedMenuItem];
+                //        m_inputCooldownDuration.Reset();
+                //    }
+                //    else if (moveInput.y > 0 && m_selectedMenuItem > MenuItem.Start)
+                //    {
+                //        m_selectedMenuItem--;
+                //        m_pointerArrow.anchoredPosition = m_pointerPositions[(int)m_selectedMenuItem];
+                //        m_inputCooldownDuration.Reset();
+                //    }
+                //}
             }
         }
 

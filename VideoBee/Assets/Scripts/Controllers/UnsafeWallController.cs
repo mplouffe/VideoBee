@@ -42,7 +42,6 @@ namespace lvl_0
                 if (collision.CompareTag("Player"))
                 {
                     m_zappedBee = collision.GetComponent<BeeController>();
-                    Debug.Log(m_zappedBee);
                     ChangeState(ZapperState.Zapping);
                 }
             }

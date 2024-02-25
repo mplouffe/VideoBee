@@ -28,6 +28,9 @@ namespace lvl_0
         [SerializeField]
         private Transform m_cursorTransform;
 
+        [SerializeField]
+        private bool m_loopAnimation;
+
         private AnimatorState m_currentState;
 
         private Duration m_waitDuration;
@@ -65,7 +68,24 @@ namespace lvl_0
                     m_cursorTransform.localScale = Vector3.Lerp(m_startScale, m_endScale, m_animateDuration.CurvedDelta());
                     if (m_animateDuration.Elapsed())
                     {
-                        m_currentState = AnimatorState.FinishedMoving;
+                        if (m_loopAnimation)
+                        {
+                            m_cursorTransform.position = m_endPosition;
+                            m_cursorTransform.localScale = m_endScale;
+
+                            m_endPosition = m_startPosition;
+                            m_startPosition = m_cursorTransform.position;
+
+                            m_endScale = m_startScale;
+                            m_startScale = m_cursorTransform.localScale;
+
+                            m_animateDuration.Reset();
+
+                        }
+                        else
+                        {
+                            m_currentState = AnimatorState.FinishedMoving;
+                        }
                     }
                     break;
             }

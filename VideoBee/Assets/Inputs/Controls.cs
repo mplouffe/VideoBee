@@ -44,6 +44,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf1ddfc9-d9b7-4301-bb8b-25fab4add8e6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""b386ed4d-ea0c-42cb-a31f-cb932264a35e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +150,50 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Boost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48d3a935-8de4-464b-b7a7-66a769413b0d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b9f57f1-e8b8-42a5-9199-6bcbc4e514f6"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97a267b8-f940-4729-adf1-d4738f350ef4"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbf2b535-4053-4170-980c-a9c5c21333bb"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -320,6 +382,115 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""EscapeMenu"",
+            ""id"": ""77844f76-d94c-4b84-bdf9-9507dc5e71c5"",
+            ""actions"": [
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a0f7919-4a09-4dcd-b7df-80d24fd2c4ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""5aba53ab-e0e1-4dae-bd8e-561f0dd9e9b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""820b2f0c-9963-42e5-9742-864d0308d158"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0d57229-621a-4845-9891-c94808495c13"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""247a3497-e026-4e9b-8ae0-87b9b09c80df"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""237b0dfa-5b99-4bca-ba1d-48cd32f824a5"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PauseMenu"",
+            ""id"": ""922c8ec9-b389-40da-a3dd-6fd77f7a8a63"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""78327327-c4bb-426f-85bc-ac1256da192a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b86994bc-5a94-42bc-8566-017fb8dd39e0"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ab5067d-bfb5-47df-8e86-16bb77975708"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -328,6 +499,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Level = asset.FindActionMap("Level", throwIfNotFound: true);
         m_Level_Move = m_Level.FindAction("Move", throwIfNotFound: true);
         m_Level_Boost = m_Level.FindAction("Boost", throwIfNotFound: true);
+        m_Level_Escape = m_Level.FindAction("Escape", throwIfNotFound: true);
+        m_Level_Pause = m_Level.FindAction("Pause", throwIfNotFound: true);
         // SettingsScreen
         m_SettingsScreen = asset.FindActionMap("SettingsScreen", throwIfNotFound: true);
         m_SettingsScreen_Back = m_SettingsScreen.FindAction("Back", throwIfNotFound: true);
@@ -336,6 +509,13 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_MainMenu_Select = m_MainMenu.FindAction("Select", throwIfNotFound: true);
         m_MainMenu_Escape = m_MainMenu.FindAction("Escape", throwIfNotFound: true);
         m_MainMenu_Move = m_MainMenu.FindAction("Move", throwIfNotFound: true);
+        // EscapeMenu
+        m_EscapeMenu = asset.FindActionMap("EscapeMenu", throwIfNotFound: true);
+        m_EscapeMenu_Confirm = m_EscapeMenu.FindAction("Confirm", throwIfNotFound: true);
+        m_EscapeMenu_Cancel = m_EscapeMenu.FindAction("Cancel", throwIfNotFound: true);
+        // PauseMenu
+        m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
+        m_PauseMenu_Pause = m_PauseMenu.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -397,12 +577,16 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private ILevelActions m_LevelActionsCallbackInterface;
     private readonly InputAction m_Level_Move;
     private readonly InputAction m_Level_Boost;
+    private readonly InputAction m_Level_Escape;
+    private readonly InputAction m_Level_Pause;
     public struct LevelActions
     {
         private @Controls m_Wrapper;
         public LevelActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Level_Move;
         public InputAction @Boost => m_Wrapper.m_Level_Boost;
+        public InputAction @Escape => m_Wrapper.m_Level_Escape;
+        public InputAction @Pause => m_Wrapper.m_Level_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Level; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -418,6 +602,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Boost.started -= m_Wrapper.m_LevelActionsCallbackInterface.OnBoost;
                 @Boost.performed -= m_Wrapper.m_LevelActionsCallbackInterface.OnBoost;
                 @Boost.canceled -= m_Wrapper.m_LevelActionsCallbackInterface.OnBoost;
+                @Escape.started -= m_Wrapper.m_LevelActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_LevelActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_LevelActionsCallbackInterface.OnEscape;
+                @Pause.started -= m_Wrapper.m_LevelActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_LevelActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_LevelActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_LevelActionsCallbackInterface = instance;
             if (instance != null)
@@ -428,6 +618,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Boost.started += instance.OnBoost;
                 @Boost.performed += instance.OnBoost;
                 @Boost.canceled += instance.OnBoost;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -514,10 +710,86 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public MainMenuActions @MainMenu => new MainMenuActions(this);
+
+    // EscapeMenu
+    private readonly InputActionMap m_EscapeMenu;
+    private IEscapeMenuActions m_EscapeMenuActionsCallbackInterface;
+    private readonly InputAction m_EscapeMenu_Confirm;
+    private readonly InputAction m_EscapeMenu_Cancel;
+    public struct EscapeMenuActions
+    {
+        private @Controls m_Wrapper;
+        public EscapeMenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Confirm => m_Wrapper.m_EscapeMenu_Confirm;
+        public InputAction @Cancel => m_Wrapper.m_EscapeMenu_Cancel;
+        public InputActionMap Get() { return m_Wrapper.m_EscapeMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(EscapeMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IEscapeMenuActions instance)
+        {
+            if (m_Wrapper.m_EscapeMenuActionsCallbackInterface != null)
+            {
+                @Confirm.started -= m_Wrapper.m_EscapeMenuActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= m_Wrapper.m_EscapeMenuActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= m_Wrapper.m_EscapeMenuActionsCallbackInterface.OnConfirm;
+                @Cancel.started -= m_Wrapper.m_EscapeMenuActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_EscapeMenuActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_EscapeMenuActionsCallbackInterface.OnCancel;
+            }
+            m_Wrapper.m_EscapeMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Confirm.started += instance.OnConfirm;
+                @Confirm.performed += instance.OnConfirm;
+                @Confirm.canceled += instance.OnConfirm;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
+            }
+        }
+    }
+    public EscapeMenuActions @EscapeMenu => new EscapeMenuActions(this);
+
+    // PauseMenu
+    private readonly InputActionMap m_PauseMenu;
+    private IPauseMenuActions m_PauseMenuActionsCallbackInterface;
+    private readonly InputAction m_PauseMenu_Pause;
+    public struct PauseMenuActions
+    {
+        private @Controls m_Wrapper;
+        public PauseMenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_PauseMenu_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_PauseMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IPauseMenuActions instance)
+        {
+            if (m_Wrapper.m_PauseMenuActionsCallbackInterface != null)
+            {
+                @Pause.started -= m_Wrapper.m_PauseMenuActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PauseMenuActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PauseMenuActionsCallbackInterface.OnPause;
+            }
+            m_Wrapper.m_PauseMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+            }
+        }
+    }
+    public PauseMenuActions @PauseMenu => new PauseMenuActions(this);
     public interface ILevelActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface ISettingsScreenActions
     {
@@ -528,5 +800,14 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnSelect(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IEscapeMenuActions
+    {
+        void OnConfirm(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
+    }
+    public interface IPauseMenuActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }

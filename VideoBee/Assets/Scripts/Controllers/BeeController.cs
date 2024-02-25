@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace lvl_0
 {
@@ -51,6 +52,20 @@ namespace lvl_0
             m_controls = new Controls();
             m_controls.Level.Enable();
             m_struggleDuration = new Duration(m_struggleTime);
+
+
+        }
+
+        private void OnEnable()
+        {
+            m_controls.Level.Escape.performed += OnEscapePressed;
+            m_controls.Level.Pause.performed += OnPausePressed;
+        }
+
+        private void OnDisable()
+        {
+            m_controls.Level.Escape.performed -= OnEscapePressed;
+            m_controls.Level.Pause.performed -= OnPausePressed;
         }
 
         // Update is called once per frame
@@ -179,6 +194,22 @@ namespace lvl_0
                 {
                     ChangeState(BeeState.Trapped);
                 }
+            }
+        }
+
+        private void OnEscapePressed(CallbackContext context)
+        {
+            if (m_beeState == BeeState.Alive)
+            {
+                LevelController.Instance.Escape();
+            }
+        }
+
+        private void OnPausePressed(CallbackContext context)
+        {
+            if (m_beeState == BeeState.Alive)
+            {
+                LevelController.Instance.Pause();
             }
         }
     }
