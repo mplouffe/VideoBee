@@ -2567,7 +2567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1674133942344004670, guid: bbfa04c04cf747b48805b60b5b3ecac1, type: 3}
       propertyPath: m_wind.x
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1674133942344004671, guid: bbfa04c04cf747b48805b60b5b3ecac1, type: 3}
       propertyPath: m_Name
