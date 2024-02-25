@@ -40,9 +40,6 @@ namespace lvl_0
         [SerializeField]
         private Vector3 m_levelStartPosition;
 
-        [SerializeField]
-        private int m_playerLives;
-
         private Duration m_startingDuration;
         private Duration m_restingDuration;
         private Duration m_endingDuration;
@@ -53,8 +50,9 @@ namespace lvl_0
 
         private Controls m_controls;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             m_startingDuration = new Duration(m_startTime);
             m_restingDuration = new Duration(m_restTime);
             m_endingDuration = new Duration(m_endTime);
@@ -80,7 +78,7 @@ namespace lvl_0
 
         private void Start()
         {
-            m_hud.UpdateLives(m_playerLives);
+            m_hud.UpdateLives(LevelVault.Instance.GetCurrentLives());
             ChangeState(LevelState.Starting);
         }
 
@@ -111,6 +109,7 @@ namespace lvl_0
                     m_endingDuration.Update(Time.deltaTime);
                     if (m_endingDuration.Elapsed())
                     {
+                        PopupsManager.Instance.LevelEnd(false);
                         LevelAttendant.Instance.LoadGameState(GameState.LevelEnd);
                     }
                     break;
@@ -118,7 +117,7 @@ namespace lvl_0
                     m_deadDuration.Update(Time.deltaTime);
                     if (m_deadDuration.Elapsed())
                     {
-                        if (m_playerLives > 0)
+                        if (LevelVault.Instance.GetCurrentLives() > 0)
                         {
                             ChangeState(LevelState.Starting);
                         }
@@ -158,9 +157,6 @@ namespace lvl_0
                 case LevelState.Returning:
                     ChangeState(LevelState.Paused);
                     break;
-
-
-
             }
         }
 
@@ -182,6 +178,9 @@ namespace lvl_0
                     PopupsManager.Instance.Escaped(false);
                     m_controls.EscapeMenu.Disable();
                     break;
+                case LevelState.Starting:
+                    PopupsManager.Instance.LevelStart(false);
+                    break;
             }
 
             switch (newState)
@@ -193,6 +192,7 @@ namespace lvl_0
                     m_beehive.SetCollider(false);
                     m_flower.SetCollider(true);
                     m_hud.UpdateStateText("Starting...");
+                    PopupsManager.Instance.LevelStart(true, LevelVault.Instance.GetCurrentLevel());
                     m_camera.Follow = m_player.transform;
                     break;
                 case LevelState.Fetching:
@@ -216,10 +216,11 @@ namespace lvl_0
                     m_beehive.SetCollider(false);
                     m_player.ChangeState(BeeState.Resting);
                     m_hud.UpdateStateText("Ending...");
+                    PopupsManager.Instance.LevelEnd(true);
                     break;
                 case LevelState.Dead:
-                    m_playerLives--;
-                    m_hud.UpdateLives(m_playerLives);
+                    LevelVault.Instance.DecrementLives();
+                    m_hud.UpdateLives(LevelVault.Instance.GetCurrentLives());
                     m_deadDuration.Reset();
                     m_hud.UpdateStateText("Dead!");
                     break;

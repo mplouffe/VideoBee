@@ -10,7 +10,8 @@ namespace lvl_0
 {
     public class LevelAttendant : SingletonBase<LevelAttendant>
     {
-
+        [SerializeField]
+        private int m_buildIndexOffset;
 
         [SerializeField]
         private List<GameStateDictionaryEntry> m_gameDictionaryEntries;
@@ -57,11 +58,26 @@ namespace lvl_0
             }
         }
 
+        public void LoadLevel(int levelToLoad)
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene(levelToLoad + m_buildIndexOffset);
+            m_currentGame = GameState.GameRunning;
+        }
+
         private void OnSceneLoaded(Scene loadedScene, LoadSceneMode loadSceneMode)
         {
             if (m_gameStateReverseSearchIndex.ContainsKey(loadedScene.buildIndex))
             {
                 if (m_gameStateReverseSearchIndex[loadedScene.buildIndex] == m_currentGame)
+                {
+                    SceneManager.sceneLoaded -= OnSceneLoaded;
+                    return;
+                }
+            }
+            else
+            {
+                if (loadedScene.buildIndex == LevelVault.Instance.GetCurrentLevel() + m_buildIndexOffset)
                 {
                     SceneManager.sceneLoaded -= OnSceneLoaded;
                     return;
@@ -89,6 +105,7 @@ namespace lvl_0
         CutScene,
         GameRunning,
         GameOver,
-        LevelEnd
+        LevelEnd,
+        GameComplete
     }
 }

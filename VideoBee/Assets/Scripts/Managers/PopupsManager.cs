@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PopupsManager : MonoBehaviour
@@ -17,6 +18,15 @@ public class PopupsManager : MonoBehaviour
 
     [SerializeField]
     private CanvasGroup m_escapedCanvasGroup;
+
+    [SerializeField]
+    private CanvasGroup m_levelStartGroup;
+
+    [SerializeField]
+    private TextMeshProUGUI m_levelStartText;
+
+    [SerializeField]
+    private CanvasGroup m_levelEndingGroup;
 
     private void Awake()
     {
@@ -51,5 +61,23 @@ public class PopupsManager : MonoBehaviour
     public void Escaped(bool escaped)
     {
         m_escapedCanvasGroup.alpha = escaped ? 1 : 0;
+    }
+
+    public void LevelStart(bool levelStarting, int level = 0)
+    {
+        m_levelStartGroup.alpha = levelStarting ? 1 : 0;
+        if (level > 0)
+        {
+            m_levelStartText.text = $"Level {level}";
+        }
+        else
+        {
+            Debug.Log("called with >= 0");
+        }
+    }
+
+    public void LevelEnd(bool levelEnding)
+    {
+        m_levelEndingGroup.alpha = levelEnding ? 1 : 0;
     }
 }

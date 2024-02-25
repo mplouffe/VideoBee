@@ -80,6 +80,7 @@ namespace lvl_0
                 switch (m_selectedMenuItem)
                 {
                     case MenuItem.Start:
+                        LevelVault.Instance.Reset();
                         LevelAttendant.Instance.LoadGameState(GameState.GameStart);
                         break;
                     case MenuItem.Settings:
