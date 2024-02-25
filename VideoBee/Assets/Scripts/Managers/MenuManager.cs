@@ -81,7 +81,7 @@ namespace lvl_0
                 {
                     case MenuItem.Start:
                         LevelVault.Instance.Reset();
-                        LevelAttendant.Instance.LoadGameState(GameState.GameStart);
+                        LevelAttendant.Instance.LoadGameState(GameState.Instructions);
                         break;
                     case MenuItem.Settings:
                         LevelAttendant.Instance.LoadGameState(GameState.Settings);

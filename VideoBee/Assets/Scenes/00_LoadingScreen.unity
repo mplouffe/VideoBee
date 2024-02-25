@@ -338,6 +338,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 990076353325375256, guid: 568969b8c250a8b45be6b617033f5506, type: 3}
+      propertyPath: m_gameDictionaryEntries.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 990076353325375256, guid: 568969b8c250a8b45be6b617033f5506, type: 3}
+      propertyPath: m_gameDictionaryEntries.Array.data[5].Game
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 990076353325375256, guid: 568969b8c250a8b45be6b617033f5506, type: 3}
+      propertyPath: m_gameDictionaryEntries.Array.data[6].Game
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 990076353325375256, guid: 568969b8c250a8b45be6b617033f5506, type: 3}
+      propertyPath: m_gameDictionaryEntries.Array.data[5].LoaderSceneIndex
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 990076353325375256, guid: 568969b8c250a8b45be6b617033f5506, type: 3}
+      propertyPath: m_gameDictionaryEntries.Array.data[6].LoaderSceneIndex
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 990076353325375257, guid: 568969b8c250a8b45be6b617033f5506, type: 3}
       propertyPath: m_Name
       value: GameManager

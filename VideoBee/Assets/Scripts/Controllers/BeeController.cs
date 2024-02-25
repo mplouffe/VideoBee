@@ -35,6 +35,15 @@ namespace lvl_0
         [SerializeField]
         private float m_struggleRange;
 
+        [SerializeField]
+        private GameObject m_graphicsGameObject;
+
+        [SerializeField]
+        private ParticleSystem m_deathExplosionSystem;
+
+        [SerializeField]
+        private Collider2D m_collider;
+
         private int m_struggleMultiplier = 1;
 
 
@@ -52,8 +61,6 @@ namespace lvl_0
             m_controls = new Controls();
             m_controls.Level.Enable();
             m_struggleDuration = new Duration(m_struggleTime);
-
-
         }
 
         private void OnEnable()
@@ -96,18 +103,32 @@ namespace lvl_0
             switch (newState)
             {
                 case BeeState.Resting:
-                case BeeState.Dead:
                     m_rigidBody.velocity = Vector3.zero;
                     m_rigidBody.freezeRotation = true;
                     break;
+                case BeeState.Dead:
+                    m_rigidBody.velocity = Vector3.zero;
+                    m_rigidBody.freezeRotation = true;
+                    m_graphicsGameObject.SetActive(false);
+                    m_collider.enabled = false;
+                    m_deathExplosionSystem.Play();
+                    break;
                 case BeeState.Alive:
                     m_rigidBody.freezeRotation = false;
+                    m_collider.enabled = true;
+                    m_graphicsGameObject.SetActive(true);
                     break;
                 case BeeState.Trapped:
                     m_rigidBody.velocity = Vector3.zero;
                     m_rigidBody.freezeRotation = true;
                     m_struggleDuration.Reset();
                     transform.eulerAngles = new Vector3(0, 0, transform.localEulerAngles.z + m_struggleRange * m_struggleMultiplier / 2);
+                    break;
+                case BeeState.Drown:
+                    m_rigidBody.velocity = Vector3.zero;
+                    m_rigidBody.freezeRotation = true;
+                    m_graphicsGameObject.SetActive(false);
+                    m_collider.enabled = false;
                     break;
             }
             m_beeState = newState;
@@ -122,19 +143,20 @@ namespace lvl_0
 
         public void Eaten()
         {
-            gameObject.SetActive(false);
+            ChangeState(BeeState.Dead);
             OnBeeCollison?.Invoke(CollisionObject.Enemy);
         }
 
         public void Zapped()
         {
-            gameObject.SetActive(false);
+
+            ChangeState(BeeState.Dead);
             OnBeeCollison?.Invoke(CollisionObject.Enemy);
         }
 
         public void Drowned()
         {
-            gameObject.SetActive(false);
+            ChangeState(BeeState.Drown);
             OnBeeCollison?.Invoke(CollisionObject.Enemy);
         }
 
@@ -218,6 +240,7 @@ namespace lvl_0
     {
         Alive,
         Dead,
+        Drown,
         Resting,
         Trapped
     }

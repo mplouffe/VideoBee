@@ -106,6 +106,7 @@ namespace lvl_0
         GameRunning,
         GameOver,
         LevelEnd,
-        GameComplete
+        GameComplete,
+        Instructions
     }
 }

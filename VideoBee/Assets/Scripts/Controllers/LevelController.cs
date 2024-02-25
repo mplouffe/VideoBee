@@ -96,7 +96,7 @@ namespace lvl_0
                 case LevelState.Fetching:
 
                     break;
-                case LevelState.Resting:
+                case LevelState.Pollenating:
                     m_restingDuration.Update(Time.deltaTime);
                     if (m_restingDuration.Elapsed())
                     {
@@ -181,6 +181,9 @@ namespace lvl_0
                 case LevelState.Starting:
                     PopupsManager.Instance.LevelStart(false);
                     break;
+                case LevelState.Pollenating:
+                    PopupsManager.Instance.Pollenating(false);
+                    break;
             }
 
             switch (newState)
@@ -191,31 +194,31 @@ namespace lvl_0
                     m_player.ChangeState(BeeState.Resting);
                     m_beehive.SetCollider(false);
                     m_flower.SetCollider(true);
-                    m_hud.UpdateStateText("Starting...");
                     PopupsManager.Instance.LevelStart(true, LevelVault.Instance.GetCurrentLevel());
                     m_camera.Follow = m_player.transform;
                     break;
                 case LevelState.Fetching:
                     m_flower.SetCollider(true);
                     m_player.ChangeState(BeeState.Alive);
-                    m_hud.UpdateStateText("Fetching...");
+                    m_hud.UpdateStateText("Find Flowers");
                     break;
-                case LevelState.Resting:
+                case LevelState.Pollenating:
                     m_restingDuration.Reset();
                     m_flower.SetCollider(false);
                     m_player.ChangeState(BeeState.Resting);
-                    m_hud.UpdateStateText("Resting...");
+                    m_hud.UpdateStateText("");
+                    PopupsManager.Instance.Pollenating(true);
                     break;
                 case LevelState.Returning:
                     m_beehive.SetCollider(true);
                     m_player.ChangeState(BeeState.Alive);
-                    m_hud.UpdateStateText("Returning...");
+                    m_hud.UpdateStateText("Return Home");
                     break;
                 case LevelState.Ending:
                     m_endingDuration.Reset();
                     m_beehive.SetCollider(false);
                     m_player.ChangeState(BeeState.Resting);
-                    m_hud.UpdateStateText("Ending...");
+                    m_hud.UpdateStateText("");
                     PopupsManager.Instance.LevelEnd(true);
                     break;
                 case LevelState.Dead:
@@ -254,7 +257,7 @@ namespace lvl_0
                 case CollisionObject.Flower:
                     if (m_levelState == LevelState.Fetching)
                     {
-                        ChangeState(LevelState.Resting);
+                        ChangeState(LevelState.Pollenating);
                     }
                     break;
                 case CollisionObject.Enemy:
@@ -285,7 +288,7 @@ namespace lvl_0
         Unset,
         Starting,
         Fetching,
-        Resting,
+        Pollenating,
         Returning,
         Ending,
         Dead,

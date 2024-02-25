@@ -28,6 +28,9 @@ public class PopupsManager : MonoBehaviour
     [SerializeField]
     private CanvasGroup m_levelEndingGroup;
 
+    [SerializeField]
+    private CanvasGroup m_pollenatingGroup;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -79,5 +82,10 @@ public class PopupsManager : MonoBehaviour
     public void LevelEnd(bool levelEnding)
     {
         m_levelEndingGroup.alpha = levelEnding ? 1 : 0;
+    }
+
+    public void Pollenating(bool pollenating)
+    {
+        m_pollenatingGroup.alpha = pollenating ? 1 : 0;
     }
 }

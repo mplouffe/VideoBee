@@ -80,7 +80,8 @@ namespace lvl_0
                             m_startScale = m_cursorTransform.localScale;
 
                             m_animateDuration.Reset();
-
+                            m_waitDuration.Reset();
+                            m_currentState = AnimatorState.Waiting;
                         }
                         else
                         {

@@ -491,6 +491,67 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Instructions"",
+            ""id"": ""4d79712a-a10c-4dc6-8497-014eeb40629c"",
+            ""actions"": [
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""82fc723b-764c-4388-8da0-006f88a6ad04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""27a50346-b582-4be0-9bcf-a45870a749b7"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""58e90508-43a8-4fcd-a26c-53e1a828ca62"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1631d2c5-15c1-4798-b304-c5d6b61d23d0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""722b33af-9271-4f87-8a2c-8a477586928a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -516,6 +577,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         // PauseMenu
         m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
         m_PauseMenu_Pause = m_PauseMenu.FindAction("Pause", throwIfNotFound: true);
+        // Instructions
+        m_Instructions = asset.FindActionMap("Instructions", throwIfNotFound: true);
+        m_Instructions_Confirm = m_Instructions.FindAction("Confirm", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -784,6 +848,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public PauseMenuActions @PauseMenu => new PauseMenuActions(this);
+
+    // Instructions
+    private readonly InputActionMap m_Instructions;
+    private IInstructionsActions m_InstructionsActionsCallbackInterface;
+    private readonly InputAction m_Instructions_Confirm;
+    public struct InstructionsActions
+    {
+        private @Controls m_Wrapper;
+        public InstructionsActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Confirm => m_Wrapper.m_Instructions_Confirm;
+        public InputActionMap Get() { return m_Wrapper.m_Instructions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InstructionsActions set) { return set.Get(); }
+        public void SetCallbacks(IInstructionsActions instance)
+        {
+            if (m_Wrapper.m_InstructionsActionsCallbackInterface != null)
+            {
+                @Confirm.started -= m_Wrapper.m_InstructionsActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= m_Wrapper.m_InstructionsActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= m_Wrapper.m_InstructionsActionsCallbackInterface.OnConfirm;
+            }
+            m_Wrapper.m_InstructionsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Confirm.started += instance.OnConfirm;
+                @Confirm.performed += instance.OnConfirm;
+                @Confirm.canceled += instance.OnConfirm;
+            }
+        }
+    }
+    public InstructionsActions @Instructions => new InstructionsActions(this);
     public interface ILevelActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -809,5 +906,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     public interface IPauseMenuActions
     {
         void OnPause(InputAction.CallbackContext context);
+    }
+    public interface IInstructionsActions
+    {
+        void OnConfirm(InputAction.CallbackContext context);
     }
 }
