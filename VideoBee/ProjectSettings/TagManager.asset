@@ -9,6 +9,8 @@ TagManager:
   - Spider
   - SpiderWeb
   - UnsafeWall
+  - WaterDroplet
+  - SafeWall
   layers:
   - Default
   - TransparentFX

@@ -117,6 +117,12 @@ namespace lvl_0
             OnBeeCollison?.Invoke(CollisionObject.Enemy);
         }
 
+        public void Drowned()
+        {
+            gameObject.SetActive(false);
+            OnBeeCollison?.Invoke(CollisionObject.Enemy);
+        }
+
         public void ChangeWind(Vector3 newWind)
         {
             m_currentWind = newWind;
@@ -166,6 +172,10 @@ namespace lvl_0
                     ChangeState(BeeState.Trapped);
                 }
                 else if (collision.CompareTag("UnsafeWall"))
+                {
+                    ChangeState(BeeState.Trapped);
+                }
+                else if (collision.CompareTag("WaterDroplet"))
                 {
                     ChangeState(BeeState.Trapped);
                 }
