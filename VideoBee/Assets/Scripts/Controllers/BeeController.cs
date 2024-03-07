@@ -76,7 +76,7 @@ namespace lvl_0
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             switch (m_beeState)
             {

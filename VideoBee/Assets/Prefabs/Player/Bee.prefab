@@ -5192,8 +5192,8 @@ MonoBehaviour:
   m_currentWind: {x: 0, y: 0, z: 0}
   m_minimumSpeed: 20
   m_boostSpeed: 30
-  m_turningRadius: 0.025
-  m_maxVelocityChange: 0.25
+  m_turningRadius: 0.25
+  m_maxVelocityChange: 2
   m_struggleTime: 0.05
   m_struggleRange: 30
   m_graphicsGameObject: {fileID: 7684706197432087985}
